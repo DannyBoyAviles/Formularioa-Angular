@@ -12,6 +12,12 @@ export class BasicosComponent implements OnInit {
   //que elemento vamos a buscar con la referencia del html
   @ViewChild('miFormulario') miFormulario!:NgForm;
 
+  initForm = {
+    producto : "iPad",
+    precio: 6500,
+    existencias: 10
+  }
+
   constructor() { }
 
   ngOnInit(): void {
@@ -31,6 +37,12 @@ export class BasicosComponent implements OnInit {
   guardar(){
     // console.log(miFormulario.value);
     console.log(this.miFormulario);
+    console.log('posteo correcto');
+
+    this.miFormulario.resetForm({
+      precio:0,
+      existencias:0
+    });//resetea el formulario
     
   }
 
