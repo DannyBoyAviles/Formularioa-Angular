@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -9,13 +9,23 @@ import { NgForm } from '@angular/forms';
 })
 export class BasicosComponent implements OnInit {
 
+  //que elemento vamos a buscar con la referencia del html
+  @ViewChild('miFormulario') miFormulario!:NgForm;
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  guardar(miFormulario:NgForm){
-    console.log(miFormulario.value);
+  nombreValido():boolean{
+    return this.miFormulario?.controls.producto?.invalid 
+            && this.miFormulario?.controls.producto?.touched;
+  }
+
+  // guardar(miFormulario:NgForm){
+  guardar(){
+    // console.log(miFormulario.value);
+    console.log(this.miFormulario);
     
   }
 
