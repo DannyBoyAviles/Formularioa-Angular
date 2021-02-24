@@ -18,6 +18,8 @@ interface Favorito {
 })
 export class DinamicosComponent {
 
+  nuevoJuego:string='';
+
   persona: Persona = {
     nombre: 'Angel',
     favoritos: [
@@ -29,6 +31,19 @@ export class DinamicosComponent {
   guardar(){
     console.log('formulario posteado');
     
+  }
+
+  eliminar(index:number){
+    this.persona.favoritos.splice(index,1); //eliminar elementos de la propiedad persona
+  }
+
+  agregarJuego(){
+    const nuevoFavorito : Favorito = {
+      id: this.persona.favoritos.length + 1,
+      nombre: this.nuevoJuego
+    }
+    this.persona.favoritos.push({...nuevoFavorito})
+    this.nuevoJuego = '';
   }
 
 }
