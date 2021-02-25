@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -7,7 +7,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
   styles: [
   ]
 })
-export class BasicosComponent {
+export class BasicosComponent implements OnInit{
 
   // miFormulario: FormGroup = new FormGroup({
   //   nombre      : new FormControl('Ipad Air'),
@@ -17,17 +17,36 @@ export class BasicosComponent {
 
     miFormulario: FormGroup = this.fb.group({
       nombre      :[ '', [Validators.required, Validators.minLength(3)]],
-      precio      :[ 0, [Validators.required, Validators.min(0)] ],
-      existencias :[ 0, [Validators.required, Validators.min(0)] ],
+      precio      :[ , [Validators.required, Validators.min(0)] ],
+      existencias :[ , [Validators.required, Validators.min(0)] ],
     })
 
 
   constructor(private fb: FormBuilder) { }
 
+  ngOnInit() {
+    //enviando valores predefinidos al cargar el formulario
+    // this.miFormulario.setValue({ //
+    this.miFormulario.reset({
+      nombre: 'iPad Air',
+      precio: 16500
+    })    
+  }
+
   campoEsValido(campo:string){
     return this.miFormulario.controls[campo].errors &&
             this.miFormulario.controls[campo].touched
   }
+
+  guardar(){
+    if (this.miFormulario.invalid) {
+      this.miFormulario.markAllAsTouched();//marcar todos los campos como tocados, ppor la condicion que tenemos "campoEsValido()" automaticamente muestra los mensajes
+      return;
+    }
+    console.log(this.miFormulario.value);
+    this.miFormulario.reset();
+  }
+
 }
 
 /*
