@@ -15,7 +15,7 @@ export class DinamicosComponent implements OnInit {
       //colecciones de form controls
       ['Metal Gear', Validators.required],
       ['Death Stranding', Validators.required],
-    ], Validators.required)
+    ], Validators.required) //obliga a que por lo menos exista un input para ser valido el formulario
   })
 
   nuevoFavorito: FormControl = this.fb.control('', Validators.required); //
@@ -52,6 +52,10 @@ export class DinamicosComponent implements OnInit {
     this.favoritosArr.push( this.fb.control(this.nuevoFavorito.value, Validators.required));
 
     this.nuevoFavorito.reset();
+  }
+
+  borrar( i: number){
+    this.favoritosArr.removeAt(i)
   }
 
 }
